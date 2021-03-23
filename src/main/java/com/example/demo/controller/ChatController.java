@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.models.ChatMessage;
 import com.example.demo.models.Permission;
+import com.example.demo.models.SendMail;
 import com.example.demo.models.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +41,12 @@ public class ChatController {
         return chatMessage;
     }
 
+
+    @RequestMapping(value="/chat", method= RequestMethod.GET)
+    public ModelAndView chat(){
+
+        return new ModelAndView("/admin/chat");
+    }
 
 
 }
