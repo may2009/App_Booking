@@ -39,12 +39,5 @@ public class ChatController {
     }
 
 
-    @RequestMapping(value="/chat", method = RequestMethod.GET)
-    public ModelAndView chat() throws JsonProcessingException {
-
-        return new ModelAndView("/admin/chat");
-
-    }
-
 
 }
