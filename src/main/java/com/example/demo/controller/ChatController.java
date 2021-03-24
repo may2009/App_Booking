@@ -1,15 +1,20 @@
 package com.example.demo.controller;
 
-import com.example.demo.models.ChatMessage;
-import com.example.demo.models.Permission;
-import com.example.demo.models.SendMail;
-import com.example.demo.models.User;
+import com.example.demo.dao.ChatMessageRepo;
+import com.example.demo.dao.UserRepo;
+import com.example.demo.dao.UserRepository;
+import com.example.demo.models.*;
+import com.example.demo.services.UserService;
+import com.example.demo.services.UsersService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +31,26 @@ import java.util.Map;
 
 public class ChatController {
 
+    @Autowired
+    private UsersService usersServices;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private ChatMessageRepo chatMessageRepo;
+
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+
+        ChatMessage chatMessage1 = new ChatMessage();
+
+        String sender  = chatMessage.getSender();
+        String content = chatMessage.getContent();
+
+         chatMessage1.setSender(sender);
+         chatMessage1.setContent(content);
+         chatMessageRepo.save(chatMessage1);
+
         return chatMessage;
     }
 
@@ -45,7 +67,19 @@ public class ChatController {
     @RequestMapping(value="/chat", method= RequestMethod.GET)
     public ModelAndView chat(){
 
-        return new ModelAndView("/admin/chat");
+        Map<String, Object> model = new HashMap<String, Object>();
+        List<Users> users = userRepository.findAll();
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Users user = usersServices.findUserByUserName(auth.getName());
+        List<ChatMessage> chatMessage = chatMessageRepo.findAllOrderBy();
+
+        model.put("users",users);
+        model.put("chatMessage",chatMessage);
+        model.put("userConnect",user.getUserName());
+
+
+        return new ModelAndView("/admin/chat",model);
     }
 
 

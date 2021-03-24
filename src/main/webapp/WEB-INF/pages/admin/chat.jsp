@@ -45,7 +45,6 @@
         </div>
     </div>
 </section>--%>
-
 <section class="content">
     <div class="body_scroll">
         <div class="block-header">
@@ -75,21 +74,24 @@
                                 <input type="text" class="form-control" placeholder="Search..." required>
                             </div>
                             <ul class="user_list list-unstyled mb-0 mt-3">
-                                <li class="active">
-                                    <a href="javascript:void(0);">
-                                        <img src="assets/images/xs/avatar2.jpg" alt="avatar" />
-                                        <div class="about">
-                                            <div class="name">Aiden Chavez</div>
-                                            <div class="status me"> <i class="zmdi zmdi-circle"></i> online </div>
-                                        </div>
-                                    </a>
-                                </li>
+
+                                <c:forEach items="${users}" var="u">
+                                    <li class="">
+                                        <a href="javascript:void(0);">
+                                            <img src="/assets/images/user.png" alt="avatar" />
+                                            <div class="about">
+                                                <div class="name">${u.name} ${u.lastName}</div>
+                                                <div class="status me"> <i class="zmdi zmdi-circle"></i> online </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </div>
                         <div class="chat_window body">
-                            <div class="chat-header">
+                            <%--<div class="chat-header">
                                 <div class="user">
-                                    <img src="assets/images/xs/avatar2.jpg" alt="avatar" />
+                                    <img src="/assets/images/user.png" alt="avatar" />
                                     <div class="chat-about">
                                         <div class="chat-with">Aiden Chavez</div>
                                         <div class="chat-num-messages">already 8 messages</div>
@@ -119,8 +121,8 @@
                                     <div class="message my-message">
                                         <p>Are we meeting today? Project has been already finished and I have results to show you.</p>
                                         <div class="attachment">
-                                            <a class="w200" href="javascript:void(0);"><img src="assets/images/image-gallery/2.jpg" alt="" class="img-fluid img-thumbnail"></a>
-                                            <a class="w200" href="javascript:void(0);"><img src="assets/images/image-gallery/5.jpg" alt="" class="img-fluid img-thumbnail"></a>
+                                            <a class="w200" href="javascript:void(0);"><img src="/assets/images/image-gallery/2.jpg" alt="" class="img-fluid img-thumbnail"></a>
+                                            <a class="w200" href="javascript:void(0);"><img src="/assets/images/image-gallery/5.jpg" alt="" class="img-fluid img-thumbnail"></a>
                                         </div>
                                     </div>
                                 </li>
@@ -141,7 +143,34 @@
                                     </div>
                                     <input type="text" class="form-control" placeholder="Enter text here..." required>
                                 </div>
-                            </div>
+                            </div>--%>
+
+
+
+                                    <div id="chat-page" >
+
+                                            <ul id="messageArea">
+                                                <c:forEach items="${chatMessage}" var="c" >
+                                                    <c:if test="${c.sender == userConnect}">
+                                                      <li class="chat-message"><i style="background-color: rgb(255, 86, 82);">${userProfil}</i><span>${c.sender}</span><p>${c.content}</p></li>
+                                                    </c:if>
+                                                    <c:if test="${c.sender != userConnect}">
+                                                        <li class="chat-message"><i style="background-color: rgb(255, 152, 0);">${c.sender.charAt(0)}</i><span>${c.sender}</span><p>${c.content}</p></li>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </ul>
+                                            <form id="messageForm" name="messageForm">
+                                                <div class="form-group">
+                                                    <div class="input-group clearfix">
+                                                        <input type="text" id="name" value="${userConnect}" hidden placeholder="Username" autocomplete="off" class="form-control" />
+                                                        <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control"/>
+                                                        <button type="submit" class="btn btn-primary">Send</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                    </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -152,3 +181,12 @@
 
 <jsp:include page="includes/footer.jsp" />
 
+<script>
+    $( document ).ready(function() {
+        var socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, onConnected, onError);
+    });
+
+</script>
