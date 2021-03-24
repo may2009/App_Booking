@@ -18,6 +18,10 @@ public class Booking {
     @JoinColumn(name = "user")
     private User user;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "users")
+    private Users users;
+
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hotel")
@@ -100,4 +104,15 @@ public class Booking {
     public void setTitre(String titre) {
         this.titre = titre;
     }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+
+
 }

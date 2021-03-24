@@ -308,6 +308,7 @@
             <li><a href="/admin/hotel"><i class="zmdi zmdi-hotel"></i><span>Hotel</span></a></li>
             <li><a href="/admin/SendMail"><i class="zmdi zmdi-mail-send"></i><span>Messages</span></a></li>
             <li><a href="/admin/chat"><i class="zmdi zmdi-tag-more"></i><span>Chat</span></a></li>
+            <li><a href="/admin/facture"><i class="zmdi zmdi-format-list-bulleted"></i><span>Facture</span></a></li>
             <li><a href="/admin/permissions"><i class="zmdi zmdi-settings"></i><span>Settings</span></a></li>
 
 

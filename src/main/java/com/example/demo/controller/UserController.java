@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 import com.example.demo.dao.PermissionRepo;
 import com.example.demo.dao.UserRepo;
+import com.example.demo.dao.UserRepository;
 import com.example.demo.models.Permission;
 import com.example.demo.models.User;
 import com.example.demo.models.Users;
@@ -28,11 +29,13 @@ public class UserController {
     @Autowired
     private UserRepo userRepo;
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
     private PermissionRepo permissionRepo;
    @RequestMapping("/users")
     public ModelAndView welcome() {
         Map<String, Object> model = new HashMap<String, Object>();
-        List<User> usr = userServices.getAll();
+        List<Users> usr = userRepository.findAll();
 
 
         model.put("All",usr);

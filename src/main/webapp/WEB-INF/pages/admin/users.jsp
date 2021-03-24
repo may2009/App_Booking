@@ -41,8 +41,7 @@
                                     <tr>
                                         <th>Nom</th>
                                         <th>Prénom</th>
-                                        <th>Paye</th>
-                                        <th>Date Naissance</th>
+                                        <th>Email</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -51,8 +50,7 @@
                                         <tr>
                                             <td>${v.name}</td>
                                             <td>${v.lastName}</td>
-                                            <td>${v.paye}</td>
-                                            <td>${v.dateNaissance}</td>
+                                            <td>${v.email}</td>
                                             <td>
                                                 <c:if test="${permission.modifier==1}">
                                                     <button type="button" class="btn btn-primary"

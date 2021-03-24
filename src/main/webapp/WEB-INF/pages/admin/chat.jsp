@@ -152,7 +152,7 @@
                                             <ul id="messageArea">
                                                 <c:forEach items="${chatMessage}" var="c" >
                                                     <c:if test="${c.sender == userConnect}">
-                                                      <li class="chat-message"><i style="background-color: rgb(255, 86, 82);">${userProfil}</i><span>${c.sender}</span><p>${c.content}</p></li>
+                                                      <li class="chat-message"><i style="background-color: rgb(255, 86, 82);">${c.sender.charAt(0)}</i><span>${c.sender}</span><p>${c.content}</p></li>
                                                     </c:if>
                                                     <c:if test="${c.sender != userConnect}">
                                                         <li class="chat-message"><i style="background-color: rgb(255, 152, 0);">${c.sender.charAt(0)}</i><span>${c.sender}</span><p>${c.content}</p></li>
