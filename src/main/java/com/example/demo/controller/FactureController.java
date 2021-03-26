@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dao.BookingRepo;
 import com.example.demo.dao.ClientRepo;
+import com.example.demo.dao.FactureRepo;
 import com.example.demo.models.Booking;
 import com.example.demo.models.Client;
 import com.example.demo.models.Users;
@@ -32,18 +33,26 @@ public class FactureController {
     @Autowired
     private ClientRepo clientRepo;
     @Autowired
+    private FactureRepo factureRepo;
+    @Autowired
     private UsersService usersService;
 
 
    @RequestMapping("/client_facture")
-    public ModelAndView welcome() {
+    public ModelAndView client_facture() throws IOException {
         Map<String, Object> model = new HashMap<String, Object>();
         List<Client> clients = clientRepo.getAll();
 
            model.put("clients",clients);
 
+
            return new ModelAndView("/admin/facture", model);
 
+    }
+    @RequestMapping("/download")
+    public ResponseEntity<InputStreamResource> download() throws IOException {
+
+        return  facture(16);
     }
 
     @RequestMapping(value = "/facture", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
@@ -70,13 +79,19 @@ public class FactureController {
 
 
 
-        ByteArrayInputStream bis = GeneratePdfFacture.bookingfacture(bookings,clientfacture,sumPrix);
-
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=facture.pdf");
 
+
+
+        ByteArrayInputStream bis = GeneratePdfFacture.bookingfacture(bookings,clientfacture,sumPrix);
+
+
+
         return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(bis));
+
+
     }
 
 }
