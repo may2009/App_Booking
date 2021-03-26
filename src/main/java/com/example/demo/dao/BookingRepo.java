@@ -1,7 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.models.Booking;
-import com.example.demo.models.User;
+import com.example.demo.models.Client;
 import com.example.demo.models.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +18,9 @@ public interface BookingRepo extends JpaRepository<Booking,Integer> {
     List<Booking> getAll();
 
 
-    @Query(value = "SELECT b FROM Booking b where b.users=:user order by b.id desc")
-    List<Booking> findAllByUserId(Users user);
+    @Query(value = "SELECT b FROM Booking b where b.client.id=:client order by b.id desc")
+    List<Booking> findAllByClientId(int client);
+
+    @Query(value = "SELECT sum(b.prix) FROM Booking b where b.client.id=:client")
+    int SumPrixBooking(int client);
 }

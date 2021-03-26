@@ -15,8 +15,8 @@ public class Booking {
 
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user")
-    private User user;
+    @JoinColumn(name = "client")
+    private Client client;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "users")
@@ -46,14 +46,6 @@ public class Booking {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getBooking_time() {
@@ -113,6 +105,11 @@ public class Booking {
         this.users = users;
     }
 
+    public Client getClient() {
+        return client;
+    }
 
-
+    public void setClient(Client client) {
+        this.client = client;
+    }
 }

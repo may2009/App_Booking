@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.BookingRepo;
+import com.example.demo.dao.ClientRepo;
 import com.example.demo.models.Booking;
+import com.example.demo.models.Client;
 import com.example.demo.models.Users;
 import com.example.demo.services.UsersService;
 import com.example.demo.utility.GeneratePdfFacture;
@@ -28,31 +30,47 @@ public class FactureController {
     @Autowired
     private BookingRepo bookingRepo;
     @Autowired
+    private ClientRepo clientRepo;
+    @Autowired
     private UsersService usersService;
 
 
-/*   @RequestMapping("/facture")
+   @RequestMapping("/client_facture")
     public ModelAndView welcome() {
         Map<String, Object> model = new HashMap<String, Object>();
-        List<Booking> bookings = bookingRepo.getAll();
+        List<Client> clients = clientRepo.getAll();
 
-           model.put("booking",bookings);
+           model.put("clients",clients);
 
            return new ModelAndView("/admin/facture", model);
 
-    }*/
+    }
 
     @RequestMapping(value = "/facture", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> facture() throws IOException {
+    public ResponseEntity<InputStreamResource> facture(@RequestParam int client) throws IOException {
 
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Users user = usersService.findUserByUserName(auth.getName());
 
+        Client clientfacture = clientRepo.getOneClient(client);
 
-        List<Booking> bookings = bookingRepo.findAllByUserId(user);
 
-        ByteArrayInputStream bis = GeneratePdfFacture.bookingfacture(bookings,user);
+        List<Booking> bookings = bookingRepo.findAllByClientId(client);
+        int sumPrix = 0;
+
+        try {
+            //  Block of code to try
+            sumPrix = bookingRepo.SumPrixBooking(client);
+        }
+        catch(Exception e) {
+            //  Block of code to handle errors
+            sumPrix = 0;
+        }
+
+
+
+        ByteArrayInputStream bis = GeneratePdfFacture.bookingfacture(bookings,clientfacture,sumPrix);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=facture.pdf");

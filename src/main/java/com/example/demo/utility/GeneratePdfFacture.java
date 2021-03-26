@@ -2,17 +2,26 @@ package com.example.demo.utility;
 
 import com.example.demo.dao.BookingRepo;
 import com.example.demo.models.Booking;
+import com.example.demo.models.Client;
 import com.example.demo.models.Users;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.text.*;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfDocument;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.VerticalPositionMark;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.itextpdf.layout.element.Table;
 
 
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import javax.swing.text.StyledEditorKit;
+import java.awt.*;
+import java.io.*;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +32,7 @@ public class GeneratePdfFacture {
 
 
 
-    public static ByteArrayInputStream bookingfacture(List<Booking> bookings, Users user) {
+    public static ByteArrayInputStream bookingfacture(List<Booking> bookings, Client client, float sumPrix) {
 
 
         Document document = new Document();
@@ -33,9 +42,25 @@ public class GeneratePdfFacture {
         document.addTitle("Facture : "+user.getUserName());*/
 
         try {
-/*
-            Paragraph paragraph1 = new Paragraph();
-            paragraph1.add("Facture : "+user.getUserName(),Element.ALIGN_LEFT);*/
+
+
+
+            float fntSize, lineSpacing;
+            fntSize = 18.7f;
+            lineSpacing = 20f;
+
+            Font headParag = FontFactory.getFont(FontFactory.HELVETICA_BOLD,fntSize);
+
+            Font font = new Font(Font.FontFamily.TIMES_ROMAN,20,Font.BOLD);
+
+            Paragraph paragraph1 = new Paragraph( new Phrase("Facture : "+client.getName()+" "+client.getLastName(),font));
+            paragraph1.setAlignment(Element.ALIGN_CENTER);
+            paragraph1.setPaddingTop(0);
+           /* paragraph1.add(Chunk.NEWLINE);*/
+            paragraph1.setFont(font);
+            paragraph1.setSpacingAfter(12);
+
+
 
 
 
@@ -43,6 +68,7 @@ public class GeneratePdfFacture {
             PdfPTable table = new PdfPTable(4);
             table.setWidthPercentage(100);
             table.setWidths(new int[] { 5, 5, 5, 5 });
+            table.getDefaultCell().setBorderWidth(0f);
 
             Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 
@@ -124,17 +150,59 @@ public class GeneratePdfFacture {
 
             }
 
+
+
+
+            //Total
+            PdfPTable total = new PdfPTable(1);
+            total.setSpacingBefore(20);
+            total.setWidthPercentage(25);
+            total.setHorizontalAlignment(Element.ALIGN_RIGHT);
+
+
+            Font totalFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+
+            PdfPCell hcelltotal;
+            hcelltotal = new PdfPCell(new Phrase("Total", headFont));
+            hcelltotal.setHorizontalAlignment(Element.ALIGN_CENTER);
+            total.addCell(hcelltotal);
+
+
+            PdfPCell celltotal;
+            celltotal = new PdfPCell(new Phrase(sumPrix+" MAD"));
+            celltotal.setHorizontalAlignment(Element.ALIGN_CENTER);
+            celltotal.setBackgroundColor(BaseColor.RED);
+            total.addCell(celltotal);
+
+
+
+
             PdfWriter.getInstance(document, out);
             document.open();
-            document.addTitle("Facture : " + user.getUserName());
-           /* document.add(paragraph1);*/
+
+
+
+
+            //images
+            Image img = Image.getInstance("logo.png");
+           /* img.setRotation(270f);*/
+            img.scaleAbsolute(100f, 50f);
+
+
+            document.add(img);
+            document.add(paragraph1);
             document.add(table);
+            document.add(total);
 
             document.close();
 
-        } catch (DocumentException ex) {
+        } catch (DocumentException | FileNotFoundException ex) {
 
             Logger.getLogger(GeneratePdfReport.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return new ByteArrayInputStream(out.toByteArray());

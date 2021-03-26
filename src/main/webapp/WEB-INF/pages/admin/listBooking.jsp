@@ -36,8 +36,9 @@
                             <tr>
                                 <th>Titre</th>
                                 <th>Booking Time</th>
-                                <th>User</th>
+                                <th>Client</th>
                                 <th>hotel</th>
+                                <th>Prix</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -46,8 +47,9 @@
                                 <tr>
                                     <td>${b.titre}</td>
                                     <td>${b.booking_time}</td>
-                                    <td>${b.user.name} ${b.user.lastName}</td>
+                                    <td>${b.client.name} ${b.client.lastName}</td>
                                     <td>${b.hotel.name}</td>
+                                    <td>${b.prix} MAD</td>
                                     <td>
                                         <a type="button" class="btn btn-primary" style="color: white"
                                                 href="/admin/editBooking?id=${b.id}">Modifier</a>

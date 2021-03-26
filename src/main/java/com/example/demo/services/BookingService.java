@@ -2,7 +2,6 @@ package com.example.demo.services;
 
 import com.example.demo.models.Booking;
 import com.example.demo.models.Hotel;
-import com.example.demo.models.User;
 
 import java.util.List;
 

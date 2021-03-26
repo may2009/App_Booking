@@ -1,9 +1,7 @@
 package com.example.demo.services;
 import com.example.demo.dao.BookingRepo;
-import com.example.demo.dao.UserRepo;
 import com.example.demo.models.Booking;
 import com.example.demo.models.Hotel;
-import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -41,7 +39,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void saveBooking(Booking booking, Hotel hotel) {
-        booking.setUser(booking.getUser());
+        booking.setClient(booking.getClient());
         booking.setHotel(hotel);
         bookingRepo.save(booking);
     }

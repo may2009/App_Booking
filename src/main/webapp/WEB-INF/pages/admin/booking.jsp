@@ -47,11 +47,11 @@
                                id="booking_time">
                     </div>
                     <div class="form-group">
-                        <label>User :</label>
-                        <select class="form-control show-tick ms search-select select2" name="user" id="user">
+                        <label>Client :</label>
+                        <select class="form-control show-tick ms search-select select2" name="client" id="client">
                             <option value="">Choisir...</option>
-                            <c:forEach items="${user}" var="u">
-                                <option value="${u.id}" <c:if test="${u.id==booking.user.id}" > selected </c:if>  >${u.name} ${u.lastName}</option>
+                            <c:forEach items="${clients}" var="u">
+                                <option value="${u.id}" <c:if test="${u.id==booking.client.id}" > selected </c:if>  >${u.name} ${u.lastName}</option>
                             </c:forEach>
                         </select>
                     </div>

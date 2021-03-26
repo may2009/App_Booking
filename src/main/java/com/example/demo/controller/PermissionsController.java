@@ -4,7 +4,7 @@ package com.example.demo.controller;
 import com.example.demo.dao.PageRepo;
 import com.example.demo.dao.PermissionRepo;
 import com.example.demo.dao.RoleRepository;
-import com.example.demo.dao.UserRepo;
+import com.example.demo.dao.ClientRepo;
 import com.example.demo.models.*;
 import com.example.demo.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 
 @Controller
@@ -30,7 +29,7 @@ public class PermissionsController {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private UserRepo userRepo;
+    private ClientRepo clientRepo;
     @Autowired
     private PageRepo pageRepo;
     @Autowired

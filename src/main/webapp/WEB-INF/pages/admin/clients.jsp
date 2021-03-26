@@ -9,10 +9,10 @@
     <div class="block-header">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
-                <h2>Users</h2>
+                <h2>Clients</h2>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> App</a></li>
-                        <li class="breadcrumb-item active">Users</li>
+                        <li class="breadcrumb-item active">Clients</li>
                 </ul>
                 <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
             </div>
@@ -29,7 +29,7 @@
 
                 <c:if test="${permission.ajouter==1}">
                     <button type="button" class="btn btn-success"
-                            onclick="addmodal()">Ajouter User</button>
+                            onclick="addmodal()">Ajouter Client</button>
                 </c:if>
 
 
@@ -41,7 +41,8 @@
                                     <tr>
                                         <th>Nom</th>
                                         <th>Prénom</th>
-                                        <th>Email</th>
+                                        <th>Paye</th>
+                                        <th>date Naissance</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -50,14 +51,15 @@
                                         <tr>
                                             <td>${v.name}</td>
                                             <td>${v.lastName}</td>
-                                            <td>${v.email}</td>
+                                            <td>${v.paye}</td>
+                                            <td>${v.dateNaissance}</td>
                                             <td>
                                                 <c:if test="${permission.modifier==1}">
                                                     <button type="button" class="btn btn-primary"
                                                             onclick="modifmodal('${v.id}')">Modifier</button>
                                                 </c:if>
                                                 <c:if test="${permission.supprimer==1}">
-                                                    <a href="/admin/deleteUser?id=${v.id}" style="color: white"
+                                                    <a href="/admin/deleteClient?id=${v.id}" style="color: white"
                                                        class="btn btn-sm btn-danger" type="button" id="SupBtn" >
                                                         Supprimer
                                                     </a>
@@ -119,7 +121,7 @@
         function modifmodal(id){
             $.ajax({
                 type: "GET",
-                url: '/admin/getOneUseser',
+                url: '/admin/getOneClient',
                 data : 'id=' + id,
                 success: function(response){
 

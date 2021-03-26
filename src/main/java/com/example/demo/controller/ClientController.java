@@ -1,86 +1,82 @@
 package com.example.demo.controller;
 import com.example.demo.dao.PermissionRepo;
-import com.example.demo.dao.UserRepo;
+import com.example.demo.dao.ClientRepo;
 import com.example.demo.dao.UserRepository;
+import com.example.demo.models.Client;
 import com.example.demo.models.Permission;
-import com.example.demo.models.User;
-import com.example.demo.models.Users;
-import com.example.demo.services.UserService;
+import com.example.demo.services.ClientService;
 import com.example.demo.services.UsersService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 @Controller
 @RequestMapping("/admin")
-public class UserController {
+public class ClientController {
     @Autowired
-    private UserService userServices;
+    private ClientService clientServices;
     @Autowired
     private UsersService userService;
     @Autowired
-    private UserRepo userRepo;
+    private ClientRepo clientRepo;
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private PermissionRepo permissionRepo;
-   @RequestMapping("/users")
+   @RequestMapping("/clients")
     public ModelAndView welcome() {
         Map<String, Object> model = new HashMap<String, Object>();
-        List<Users> usr = userRepository.findAll();
+        List<Client> clients = clientRepo.findAll();
 
 
-        model.put("All",usr);
+        model.put("All",clients);
        Permission permission = permissionRepo.findByPageId(1);
        model.put("permission",permission);
        if(!permission.getAfficher().equals("1")){
            return new ModelAndView("/error", model);
        }else {
-           return new ModelAndView("/admin/users", model);
+           return new ModelAndView("/admin/clients", model);
        }
     }
     @RequestMapping(value="/add", method = RequestMethod.POST)
-    public String add(@ModelAttribute User user) throws JsonProcessingException {
+    public String add(@ModelAttribute Client client) throws JsonProcessingException {
 
-        userServices.addUser(user);
+        clientServices.addClient(client);
 
         Permission permission = permissionRepo.findByPageId(1);
         if(!permission.getAjouter().equals("1")){
             return "error";
         }else {
-            return "redirect:/admin/users";
+            return "redirect:/admin/clients";
         }
     }
-    @RequestMapping(value="/getOneUseser", method = RequestMethod.GET)
-    public @ResponseBody User getOneUseser(@RequestParam int id) throws
+    @RequestMapping(value="/getOneClient", method = RequestMethod.GET)
+    public @ResponseBody Client getOneClient(@RequestParam int id) throws
             JsonProcessingException {
-        User usr = userServices.GetOneUser(id);
+        Client client = clientServices.GetOneClient(id);
 
-        return usr;
+        return client;
     }
-    @RequestMapping(value="/deleteUser",method = RequestMethod.GET)
-    public String deleteUser(HttpServletRequest id)
+    @RequestMapping(value="/deleteClient",method = RequestMethod.GET)
+    public String deleteClient(HttpServletRequest id)
     {
         String idd = id.getParameter("id");
         int idint=0;
         if(idd != null && idd !="")
         {
             idint = Integer.parseInt(idd);
-            userServices.deleteuser(idint);
+            clientServices.deleteClient(idint);
         }
         Permission permission = permissionRepo.findByPageId(1);
         if(!permission.getSupprimer().equals("1")){
             return "error";
         }else {
-            return "redirect:/admin/users";
+            return "redirect:/admin/clients";
         }
     }
 }

@@ -25,7 +25,7 @@ public class HotelController {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private UserRepo userRepo;
+    private ClientRepo clientRepo;
     @Autowired
     private PageRepo pageRepo;
     @Autowired

@@ -1,6 +1,6 @@
 package com.example.demo.services;
-import com.example.demo.dao.UserRepo;
-import com.example.demo.models.User;
+import com.example.demo.dao.ClientRepo;
+import com.example.demo.models.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -10,45 +10,45 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class ClientServiceImpl implements ClientService {
     @Value("${demo.url}")
     private String url;
     @Autowired
-    UserRepo userRepo;
+    ClientRepo clientRepo;
     @Override
-    public List<User> getAll() {
+    public List<Client> getAll() {
        /* final String uri = url+ "/getAllRest";
         RestTemplate restTemplate = new RestTemplate();
-        User[] result = restTemplate.getForObject(uri, User[].class);
+        Client[] result = restTemplate.getForObject(uri, Client[].class);
         return result;*/
 
-        return userRepo.getAll();
+        return clientRepo.getAll();
 
     }
     @Override
-    public void addUser(User user) {
-       /* final String uri = url+ "/addUserRest/"+user;
+    public void addClient(Client Client) {
+       /* final String uri = url+ "/addClientRest/"+Client;
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.put(uri, User.class);*/
+        restTemplate.put(uri, Client.class);*/
 
-        userRepo.save(user);
+        clientRepo.save(Client);
 
     }
     @Override
-    public void deleteuser(int id) {
-      /*  final String uri = url+"/deleteUserRest/"+id;
+    public void deleteClient(int id) {
+      /*  final String uri = url+"/deleteClientRest/"+id;
         RestTemplate restTemplate=new RestTemplate();
-        restTemplate.put(uri,User.class);*/
-        userRepo.deleteById(id);
+        restTemplate.put(uri,Client.class);*/
+        clientRepo.deleteById(id);
 
     }
     @Override
-    public User GetOneUser(int id) {
-       /* final String uri = url+ "/GetOneUserRest/"+id;
+    public Client GetOneClient(int id) {
+       /* final String uri = url+ "/GetOneClientRest/"+id;
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(uri, String.class);
         return result;*/
 
-        return userRepo.getOneUser(id);
+        return clientRepo.getOneClient(id);
     }
 }

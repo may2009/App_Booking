@@ -2,11 +2,11 @@ package com.example.demo.controller;
 
 import com.example.demo.dao.*;
 import com.example.demo.models.Booking;
+import com.example.demo.models.Client;
 import com.example.demo.models.Hotel;
 import com.example.demo.models.Permission;
-import com.example.demo.models.User;
 import com.example.demo.services.BookingService;
-import com.example.demo.services.UserService;
+import com.example.demo.services.ClientService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,11 +23,13 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
     @Autowired
-    private UserService userService;
+    private ClientService clientService;
     @Autowired
     private BookingRepo bookingRepo;
     @Autowired
-    private UserRepo userRepo;
+    private ClientRepo clientRepo;
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private HotelRepo hotelRepo;
     @Autowired
@@ -36,8 +38,9 @@ public class BookingController {
     @RequestMapping("/addBooking")
     public ModelAndView addBooking() {
         Map<String, Object> model = new HashMap<String, Object>();
-        List<User> user = userRepo.getUserByAge();
-        model.put("user",user);
+
+        List<Client> clients = clientRepo.getClientByAge();
+        model.put("clients",clients);
         model.put("hotel",hotelRepo.findAll());
         model.put("submit","Ajouter");
         return new ModelAndView("admin/booking", model);
@@ -63,21 +66,21 @@ public class BookingController {
     public ModelAndView editBooking(@RequestParam int id) {
         Map<String, Object> model = new HashMap<String, Object>();
         Booking booking = bookingService.getOneById(id);
-        List<User> user = userService.getAll();
+        List<Client> clients = clientService.getAll();
         model.put("booking",booking);
-        model.put("user",user);
+        model.put("clients",clients);
         model.put("submit","Modifier");
         return new ModelAndView("admin/booking", model);
     }
 
 @GetMapping("/deleteBooking")
-    public ModelAndView deleteBooking(@RequestParam int id) {
+    public String deleteBooking(@RequestParam int id) {
         Map<String, Object> model = new HashMap<String, Object>();
         Booking booking = bookingService.getOneById(id);
 
         bookingService.deleteBooking(id);
 
-    return new ModelAndView("admin/listBooking", model);
+    return "redirect:/admin/listBooking";
     }
 
 
