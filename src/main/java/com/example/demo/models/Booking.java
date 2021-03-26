@@ -112,4 +112,7 @@ public class Booking {
     public void setClient(Client client) {
         this.client = client;
     }
+
+
+
 }

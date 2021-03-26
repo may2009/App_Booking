@@ -39,6 +39,7 @@
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                     <tr>
+                                        <th>Image</th>
                                         <th>Nom</th>
                                         <th>Prénom</th>
                                         <th>Paye</th>
@@ -49,6 +50,7 @@
                                     <tbody>
                                      <c:forEach items="${All}" var="v">
                                         <tr>
+                                            <td><img src="${v.photosImagePath}" width="10%"></td>
                                             <td>${v.name}</td>
                                             <td>${v.lastName}</td>
                                             <td>${v.paye}</td>
@@ -82,9 +84,19 @@
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
-                <form method="POST"  action="/admin/add" id="formget">
+                <form method="POST"  action="/admin/add" id="formget" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" class="form-control"  id="idinput">
+
+                        <div class="form-group">
+                            <label>Image :</label>
+                            <div id="editimage" >
+                                <img src=""  id="srcimage" width=10%; alt="">
+                            <input type="hidden" id="inputimage">
+                            </div>
+                            <input type="file" class="form-control"  name="imageFile" accept="image/png, image/jpeg" id="imageFile">
+                        </div>
+
                         <div class="form-group">
                             <label>Nom :</label>
                             <input type="text" class="form-control" name="name"
@@ -126,11 +138,14 @@
                 success: function(response){
 
                         $("#dateNaissanceinput").val(response.dateNaissance);
-                        $("#payeinput").val(response.paye);
+                        $("#payeinput").val(response.paye).trigger('change');
                         $("#nominput").val(response.name);
                         $("#prenominput").val(response.lastName);
                         $("#idinput").val(response.id);
                         $("#idinput").attr("name","id");
+                        $("#srcimage").attr("src",response.photosImagePath);
+                        $("#inputimage").val(response.image);
+                        $("#inputimage").attr("name","image");
 
                  /*   $.each(JSON.parse(response), function(i, item) {
                     });*/
@@ -142,6 +157,9 @@
         }
         function addmodal(){
            /* $('input').val("");*/
+            $("#srcimage").attr("src","");
+            $("#inputimage").removeAttr("name");
+            $("input").val("");
             $("#submit").text("Ajouter");
             $('#myModal').modal('show');
         }

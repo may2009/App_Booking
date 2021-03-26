@@ -28,6 +28,10 @@ public class Client implements Serializable {
     @Column(name = "paye", nullable = true)
     private String paye;
 
+
+    @Column(name = "image",nullable = true, length = 64)
+    private String image;
+
     public int getId() {
         return id;
     }
@@ -63,4 +67,20 @@ public class Client implements Serializable {
     public void setPaye(String paye) {
         this.paye = paye;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (image == null) return null;
+
+        return "/client-photos/" + id + "/" + image;
+    }
+
 }

@@ -6,18 +6,29 @@ import com.example.demo.models.Client;
 import com.example.demo.models.Permission;
 import com.example.demo.services.ClientService;
 import com.example.demo.services.UsersService;
+import com.example.demo.utility.FileUploadUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 @Controller
 @RequestMapping("/admin")
 public class ClientController {
+
+
+    @Value("${demo.url}")
+    private String baseUrl;
+
     @Autowired
     private ClientService clientServices;
     @Autowired
@@ -36,6 +47,9 @@ public class ClientController {
 
         model.put("All",clients);
        Permission permission = permissionRepo.findByPageId(1);
+
+
+
        model.put("permission",permission);
        if(!permission.getAfficher().equals("1")){
            return new ModelAndView("/error", model);
@@ -44,9 +58,30 @@ public class ClientController {
        }
     }
     @RequestMapping(value="/add", method = RequestMethod.POST)
-    public String add(@ModelAttribute Client client) throws JsonProcessingException {
+    public String add(@ModelAttribute Client client, @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
 
-        clientServices.addClient(client);
+
+
+        String fileName = StringUtils.cleanPath(imageFile.getOriginalFilename());
+
+        if(!fileName.equals("")){
+            client.setImage(fileName);
+        }else{
+            client.setImage(client.getImage());
+        }
+
+
+        Client saveClient = clientRepo.save(client);
+
+        try {
+            String uploadDir = "client-photos/" + saveClient.getId();
+            FileUploadUtil.saveFile(uploadDir, fileName, imageFile);
+        }catch (Exception e){
+
+
+        }
+
+
 
         Permission permission = permissionRepo.findByPageId(1);
         if(!permission.getAjouter().equals("1")){
@@ -59,6 +94,7 @@ public class ClientController {
     public @ResponseBody Client getOneClient(@RequestParam int id) throws
             JsonProcessingException {
         Client client = clientServices.GetOneClient(id);
+
 
         return client;
     }
