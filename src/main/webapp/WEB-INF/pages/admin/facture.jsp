@@ -53,6 +53,107 @@
             </div>
 
 
+                <%--    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <section class="file_manager" style="background-color: #eaeaea;padding-top: 3%">
+                        <div class="body_scroll">
+                            <div class="container-fluid">
+                                <div class="row clearfix">
+                                    <div class="col-lg-12">
+                                        <div class="card">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="pdf">
+                                                    <div class="row clearfix">
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <div class="card">
+                                                                <div class="file">
+                                                                    <a href="javascript:void(0);">
+                                                                        <div class="hover">
+                                                                            <button type="button" class="btn btn-icon btn-icon-mini btn-round btn-danger">
+                                                                                <i class="zmdi zmdi-delete"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="icon">
+                                                                            <i class="zmdi zmdi-collection-pdf"></i>
+                                                                        </div>
+                                                                        <div class="file-name">
+                                                                            <p class="m-b-5 text-muted">asdf  hhkj.pdf</p>
+                                                                            <small>Size: 3MB <span class="date text-muted">Aug 18, 2019</span></small>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <div class="card">
+                                                                <div class="file">
+                                                                    <a href="javascript:void(0);">
+                                                                        <div class="hover">
+                                                                            <button type="button" class="btn btn-icon btn-icon-mini btn-round btn-danger">
+                                                                                <i class="zmdi zmdi-delete"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="icon">
+                                                                            <i class="zmdi zmdi-collection-pdf"></i>
+                                                                        </div>
+                                                                        <div class="file-name">
+                                                                            <p class="m-b-5 text-muted">asdf  hhkj.pdf</p>
+                                                                            <small>Size: 3MB <span class="date text-muted">Aug 18, 2019</span></small>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <div class="card">
+                                                                <div class="file">
+                                                                    <a href="javascript:void(0);">
+                                                                        <div class="hover">
+                                                                            <button type="button" class="btn btn-icon btn-icon-mini btn-round btn-danger">
+                                                                                <i class="zmdi zmdi-delete"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="icon">
+                                                                            <i class="zmdi zmdi-collection-pdf"></i>
+                                                                        </div>
+                                                                        <div class="file-name">
+                                                                            <p class="m-b-5 text-muted">asdf  hhkj.pdf</p>
+                                                                            <small>Size: 3MB <span class="date text-muted">Aug 18, 2019</span></small>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <div class="card">
+                                                                <div class="file">
+                                                                    <a href="javascript:void(0);">
+                                                                        <div class="hover">
+                                                                            <button type="button" class="btn btn-icon btn-icon-mini btn-round btn-danger">
+                                                                                <i class="zmdi zmdi-delete"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="icon">
+                                                                            <i class="zmdi zmdi-collection-pdf"></i>
+                                                                        </div>
+                                                                        <div class="file-name">
+                                                                            <p class="m-b-5 text-muted">asdf  hhkj.pdf</p>
+                                                                            <small>Size: 3MB <span class="date text-muted">Aug 18, 2019</span></small>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    </div>--%>
+
 
 
                 </div>

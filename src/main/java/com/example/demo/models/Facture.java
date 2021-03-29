@@ -55,11 +55,13 @@ public class Facture implements Serializable {
         this.datefacture = datefacture;
     }
 
+
     @Transient
-    public String getPhotosImagePath() {
+    public String getPdfPath() {
         if (name == null) return null;
 
-        return "/facture-pdf/" + id + "/" + name;
+        return "/pdf-file/"+ name;
     }
+
 
 }

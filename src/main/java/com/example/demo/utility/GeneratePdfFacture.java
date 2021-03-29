@@ -22,6 +22,9 @@ import javax.swing.text.StyledEditorKit;
 import java.awt.*;
 import java.io.*;
 import java.net.MalformedURLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,12 +34,16 @@ public class GeneratePdfFacture {
     private BookingRepo bookingRepo;
 
 
+/*
+    private static String FILE = "C:/Users/TNC 2021/Desktop/JAVA PROJET/App_Booking/FirstPdf.pdf";
+*/
 
-    public static ByteArrayInputStream bookingfacture(List<Booking> bookings, Client client, float sumPrix) {
+    public static ByteArrayInputStream bookingfacture(List<Booking> bookings, Client client, float sumPrix,String FILE) throws FileNotFoundException, DocumentException {
 
 
         Document document = new Document();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
+        PdfWriter.getInstance(document, new FileOutputStream(FILE));
 
 /*
         document.addTitle("Facture : "+user.getUserName());*/
@@ -195,6 +202,8 @@ public class GeneratePdfFacture {
             document.add(total);
 
             document.close();
+
+
 
         } catch (DocumentException | FileNotFoundException ex) {
 
