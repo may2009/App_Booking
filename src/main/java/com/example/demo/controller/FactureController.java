@@ -8,6 +8,7 @@ import com.example.demo.models.Client;
 import com.example.demo.models.Users;
 import com.example.demo.services.UsersService;
 import com.example.demo.utility.GeneratePdfFacture;
+import com.itextpdf.html2pdf.HtmlConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +51,15 @@ public class FactureController {
            return new ModelAndView("/admin/facture", model);
 
     }
+    @RequestMapping("/pdffacture")
+    public void pdffacture() throws IOException {
+
+        HtmlConverter.convertToPdf(new File("/admin/pdf-facture"),new File("pdf-facture.pdf"));
+
+    }
+
+
+
     @RequestMapping("/download")
     public ResponseEntity<InputStreamResource> download() throws IOException {
 

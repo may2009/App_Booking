@@ -1,18 +1,20 @@
 package com.example.demo;
-import org.apache.catalina.connector.Connector;
-import org.hibernate.annotations.Loader;
+import com.itextpdf.html2pdf.HtmlConverter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.RestTemplate;
+
+import java.io.File;
+import java.io.IOException;
 
 @SpringBootApplication
 public class DemoApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         SpringApplication.run(DemoApplication.class, args);
+/*
+        HtmlConverter.convertToPdf(new File("./pdf-facture.jsp"),new File("pdf-facture.pdf"));
+*/
+
     }
 
 
