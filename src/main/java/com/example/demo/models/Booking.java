@@ -29,6 +29,7 @@ public class Booking {
 
 
 
+
     @Column(name = "booking_time", nullable = true)
     private String booking_time;
     @Column(name = "deleted", nullable = true)
@@ -112,6 +113,7 @@ public class Booking {
     public void setClient(Client client) {
         this.client = client;
     }
+
 
 
 

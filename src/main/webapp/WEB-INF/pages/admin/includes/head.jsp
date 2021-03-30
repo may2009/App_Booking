@@ -36,9 +36,20 @@
     <!-- Main Css -->
     <link rel="stylesheet" href="/assets/css/main.css">
 
+
+    <%--upload--%>
+    <link rel="stylesheet" href="/assets/plugins/dropify/css/dropify.min.css">
+
 <style>
     ul.pagination li a {
         color: black !important;
+    }
+
+    aside#leftsidebar {
+        background-color: #383838;
+    }
+    ul.list a {
+        color: white !important;
     }
 </style>
 
@@ -69,6 +80,14 @@
     </form>
 </div>
 
+
+<div id="topBar" style="padding: 20px;background-color: #383838;">
+
+    <a href="/logout" class="mega-menu" style="float: right;margin-top: -10px;color: white;padding-left: 2%;" title="Sign Out"><i class="zmdi zmdi-power"></i></a>
+    <a href="#search" class="main_search" style="float: right;margin-top: -10px;color: white" title="Search..."><i class="zmdi zmdi-search"></i></a>
+
+</div>
+
 <!-- Right Icon menu Sidebar -->
 <div class="navbar-right">
     <ul class="navbar-nav">
@@ -76,50 +95,71 @@
         <li class="dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle" title="App" data-toggle="dropdown" role="button"><i class="zmdi zmdi-apps"></i></a>
             <ul class="dropdown-menu slideUp2">
-                <li class="header">App Sortcute</li>
+                    <li class="header">App Réservation</li>
                 <li class="body">
                     <ul class="menu app_sortcut list-unstyled">
+
                         <li>
-                            <a href="image-gallery.html">
-                                <div class="icon-circle mb-2 bg-blue"><i class="zmdi zmdi-camera"></i></div>
-                                <p class="mb-0">Photos</p>
+                            <a href="/admin/home">
+                                <div class="icon-circle mb-2 bg-blue"><i class="zmdi zmdi-home"></i></div>
+                                <p class="mb-0">Dashboard</p>
                             </a>
                         </li>
                         <li>
-                            <a href="javascript:void(0);">
-                                <div class="icon-circle mb-2 bg-amber"><i class="zmdi zmdi-translate"></i></div>
-                                <p class="mb-0">Translate</p>
+                            <a href="/admin/calendar">
+                                <div class="icon-circle mb-2 bg-amber"><i class="zmdi zmdi-calendar"></i></div>
+                                <p class="mb-0">Clendar</p>
                             </a>
                         </li>
                         <li>
-                            <a href="events.html">
-                                <div class="icon-circle mb-2 bg-green"><i class="zmdi zmdi-calendar"></i></div>
-                                <p class="mb-0">Calendar</p>
+                            <a href="/admin/clients">
+                                <div class="icon-circle mb-2 bg-green"><i class="zmdi zmdi-account"></i></div>
+                                <p class="mb-0">Clients</p>
                             </a>
                         </li>
                         <li>
-                            <a href="contact.html">
-                                <div class="icon-circle mb-2 bg-purple"><i class="zmdi zmdi-account-calendar"></i></div>
-                                <p class="mb-0">Contacts</p>
+                            <a href="/admin/listBooking">
+                                <div class="icon-circle mb-2 bg-purple"><i class="zmdi zmdi-bookmark"></i></div>
+                                <p class="mb-0">Bookings</p>
                             </a>
                         </li>
                         <li>
-                            <a href="javascript:void(0);">
-                                <div class="icon-circle mb-2 bg-red"><i class="zmdi zmdi-tag"></i></div>
-                                <p class="mb-0">News</p>
+                            <a href="/admin/hotel" >
+                                <div class="icon-circle mb-2 bg-red"><i class="zmdi zmdi-hotel"></i></div>
+                                <p class="mb-0">Hotel</p>
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="/admin/SendMail">
+                                <div class="icon-circle mb-2 bg-grey"><i class="zmdi zmdi-mail-send"></i></div>
+                                <p class="mb-0">Messages</p>
                             </a>
                         </li>
                         <li>
-                            <a href="javascript:void(0);">
-                                <div class="icon-circle mb-2 bg-grey"><i class="zmdi zmdi-map"></i></div>
-                                <p class="mb-0">Maps</p>
+                            <a href="/admin/chat">
+                                <div class="icon-circle mb-2 bg-blue"><i class="zmdi zmdi-tag-more"></i></div>
+                                <p class="mb-0">Chat</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/client_facture">
+                                <div class="icon-circle mb-2 bg-amber"><i class="zmdi zmdi-format-list-bulleted"></i></div>
+                                <p class="mb-0">Facture</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/permissions">
+                                <div class="icon-circle mb-2 bg-green"><i class="zmdi zmdi-settings"></i></div>
+                                <p class="mb-0">Settings</p>
                             </a>
                         </li>
                     </ul>
                 </li>
             </ul>
         </li>
-        <li class="dropdown">
+       <%-- <li class="dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle" title="Notifications" data-toggle="dropdown" role="button"><i class="zmdi zmdi-notifications"></i>
                 <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
             </a>
@@ -194,8 +234,8 @@
                 </li>
                 <li class="footer"> <a href="javascript:void(0);">View All Notifications</a> </li>
             </ul>
-        </li>
-        <li class="dropdown">
+        </li>--%>
+        <%--<li class="dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="zmdi zmdi-flag"></i>
                 <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
             </a>
@@ -278,10 +318,10 @@
                     </ul>
                 </li>
             </ul>
-        </li>
-        <li><a href="javascript:void(0);" class="app_calendar" title="Calendar"><i class="zmdi zmdi-calendar"></i></a></li>
-        <li><a href="javascript:void(0);" class="app_google_drive" title="Google Drive"><i class="zmdi zmdi-google-drive"></i></a></li>
-        <li><a href="javascript:void(0);" class="app_group_work" title="Group Work"><i class="zmdi zmdi-group-work"></i></a></li>
+        </li>--%>
+   <%--     <li><a href="javascript:void(0);" class="app_calendar" title="Calendar"><i class="zmdi zmdi-calendar"></i></a></li>--%>
+       <%-- <li><a href="javascript:void(0);" class="app_google_drive" title="Google Drive"><i class="zmdi zmdi-google-drive"></i></a></li>--%>
+     <%--   <li><a href="javascript:void(0);" class="app_group_work" title="Group Work"><i class="zmdi zmdi-group-work"></i></a></li>--%>
         <li><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
         <li><a href="/logout" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
     </ul>
@@ -290,8 +330,8 @@
 <!-- Left Sidebar -->
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
-        <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="/admin/home"><img src="/assets/images/logo.svg" width="25" alt="Aero"><span class="m-l-10">App Réservation</span></a>
+        <button style="color: white" class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
+        <a href="/admin/home"><img src="/assets/images/logo.png" width="50" alt="Aero"><span class="m-l-10" style="color: white">App Réservation</span></a>
     </div>
     <div class="menu">
         <ul class="list">
@@ -305,7 +345,16 @@
             <li ><a href="/admin/calendar"><i class="zmdi zmdi-calendar"></i><span>Clendar</span></a></li>
             <li><a href="/admin/clients"><i class="zmdi zmdi-account"></i><span>Clients</span></a></li>
             <li><a href="/admin/listBooking"><i class="zmdi zmdi-bookmark"></i><span>Bookings</span></a></li>
-            <li><a href="/admin/hotel"><i class="zmdi zmdi-hotel"></i><span>Hotel</span></a></li>
+            <li><a href="javascript:void(0);"  class="menu-toggle"><i class="zmdi zmdi-hotel"></i><span>Hotel & Chambres</span></a>
+                <ul class="ml-menu">
+                    <li><a href="/admin/hotel">Hotel</a></li>
+                    <li><a href="/admin/room">Chambres</a></li>
+                </ul>
+            </li>
+
+
+
+
             <li><a href="/admin/SendMail"><i class="zmdi zmdi-mail-send"></i><span>Messages</span></a></li>
             <li><a href="/admin/chat"><i class="zmdi zmdi-tag-more"></i><span>Chat</span></a></li>
             <li><a href="/admin/client_facture"><i class="zmdi zmdi-format-list-bulleted"></i><span>Facture</span></a></li>
@@ -315,6 +364,8 @@
         </ul>
     </div>
 </aside>
+
+
 
 <!-- Right Sidebar -->
 <aside id="rightsidebar" class="right-sidebar">
