@@ -94,7 +94,7 @@
                                 <img src=""  id="srcimage" width=10%; alt="">
                             <input type="hidden" id="inputimage">
                             </div>
-                            <input type="file" class="form-control"  name="imageFile" accept="image/png, image/jpeg" id="imageFile">
+                            <input type="file"  class="dropify-fr" name="imageFile" accept="image/png, image/jpeg" id="imageFile">
                         </div>
 
                         <div class="form-group">

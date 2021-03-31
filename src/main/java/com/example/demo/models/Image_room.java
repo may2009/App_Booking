@@ -45,4 +45,14 @@ public class Image_room implements Serializable {
     public void setRoom(Room room) {
         this.room = room;
     }
+
+
+
+
+    @Transient
+    public String getRoomImagePath() {
+        if (image == null) return null;
+
+        return "/room-photos/" + id + "/" + image;
+    }
 }

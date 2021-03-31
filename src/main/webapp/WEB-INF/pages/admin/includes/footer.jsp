@@ -44,7 +44,7 @@
 
 <script src="/assets/js/sockjs.min.js"></script>
 <script src="/assets/js/stomp.min.js"></script>
-<script src="/assets/js/main.js"></script>
+<%--<script src="/assets/js/main.js"></script>--%>
 
 
 
@@ -59,5 +59,7 @@
         $('.select2').select2();
     });
 </script>
+
+
 </body>
 </html>

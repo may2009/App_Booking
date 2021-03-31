@@ -18,7 +18,7 @@ public class Room implements Serializable {
     @Column(name = "prix", nullable = true)
     private float prix;
 
-    @Column(name = "description", nullable = true)
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
 
