@@ -23,4 +23,7 @@ public interface BookingRepo extends JpaRepository<Booking,Integer> {
 
     @Query(value = "SELECT sum(b.prix) FROM Booking b where b.client.id=:client")
     int SumPrixBooking(int client);
+
+    @Query(value = "SELECT count(id) FROM booking WHERE STR_TO_DATE(:date , '%Y-%m-%d') BETWEEN STR_TO_DATE(date_debut , '%Y-%m-%d') AND STR_TO_DATE(date_fin , '%Y-%m-%d')",nativeQuery = true)
+    int checkdateDebut(String date);
 }

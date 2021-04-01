@@ -1,3 +1,4 @@
+
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%><%@ taglib
         prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -42,10 +43,16 @@
                            id="titreinput">
                 </div>
                 <div class="form-group">
-                        <label>Booking Time :</label>
-                        <input type="date" class="form-control" value="${booking.booking_time}" name="booking_time"
-                               id="booking_time">
+                        <label>Date Début:</label>
+                        <input onchange="gethotelNoReserve()" type="date" required class="form-control" value="${booking.date_debut}" name="date_debut"
+                               id="date_debut">
                     </div>
+
+                <div class="form-group">
+                    <label>Date Fin:</label>
+                    <input onchange="gethotelNoReserve()" required type="date" class="form-control" value="${booking.date_fin}" name="date_fin"
+                           id="date_fin">
+                </div>
                     <div class="form-group">
                         <label>Client :</label>
                         <select class="form-control show-tick ms search-select select2" name="client" id="client">
@@ -56,23 +63,35 @@
                         </select>
                     </div>
 
-                <div class="form-group">
+                    <div class="form-group">
                         <label>Hotel :</label>
-                        <select class="form-control show-tick ms search-select select2" name="hotel" id="hotel">
-                            <option value="">Choisir...</option>
-                            <c:forEach items="${hotel}" var="h">
-                                <option value="${h.id}">${h.name}</option>
-                            </c:forEach>
+                        <select disabled required onchange="getRoom(this)" class="form-control show-tick ms search-select select2" name="hotel" id="hotel">
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Room :</label>
+                        <select disabled required class="form-control show-tick ms search-select select2" name="room" id="room">
+
+
                         </select>
                     </div>
 
                 <div class="form-group">
-                        <label>Prix (MAD) :</label>
-                    <input type="number" name="prix" class="form-control" id="prixinput">
+                        <label>Nuits :</label>
+                    <input type="number" required name="night" class="form-control" id="night">
+                </div>
+
+                <div class="form-group">
+                    <label>Invité :</label>
+                    <input type="number" required name="invite" class="form-control" id="invite">
                 </div>
 
                     <button type="submit" class="btn btn-success" id="submit">${submit}</button>
             </form>
+
+                       <%-- <button  class="btn btn-raised btn-primary waves-effect" data-type="confirm" id="warning">CLICK ME</button>--%>
 
                     </div>
                 </div>
@@ -80,5 +99,62 @@
         </div>
     </div>
 </section>
+<script>
+    function getRoom(id){
+        $.ajax({
+            type: "GET",
+            url: '/admin/getRoomHotel',
+            data : 'id=' + id.value,
+            success: function(response){
+
+                $("#room").html("");
+                $("#room").append('<option selected value="">Choisir...</option>')
+
+                $.each(response, function(i, item) {
+                    $("#room").append('<option value="'+item.id+'">'+item.name+'</option>')
+                });
+                $("#room").select2();
+                $("#room").prop('disabled', false);
+            }
+        });
+    }
+
+    function gethotelNoReserve(){
+
+
+        var date_debut = $("#date_debut").val();
+        var date_fin = $("#date_fin").val();
+
+        var d1 = Date.parse(date_debut);
+        var d2 = Date.parse(date_fin);
+
+        if(date_debut!="" && date_fin!="" && d1< d2){
+        $.ajax({
+            type: "GET",
+            url: '/admin/gethotelNoReserve',
+            data : {date_debut: date_debut,date_fin:date_fin},
+            success: function(response){
+
+                $("#hotel").html("");
+                $("#hotel").append('<option selected value="">Choisir...</option>')
+
+                $.each(response, function(i, item) {
+                    $("#hotel").append('<option value="'+item.id+'">'+item.name+'</option>')
+                });
+                $("#hotel").select2();
+                $("#room").select2();
+                $("#hotel").prop('disabled', false);
+
+            }
+        });
+        }else{
+            $("#warning").click();
+            $("#hotel").prop('disabled', true);
+            $("#hotel").prop('disabled', true);
+        }
+    }
+
+</script>
+
 
 <jsp:include page="includes/footer.jsp" />

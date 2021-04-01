@@ -16,6 +16,7 @@
 
 <%--Upload--%>
 <script src="/assets/plugins/dropify/js/dropify.min.js"></script>
+<script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
 
 <script src="/assets/bundles/mainscripts.bundle.js"></script>
 <script src="/assets/js/pages/index.js"></script>
@@ -44,7 +45,7 @@
 
 <script src="/assets/js/sockjs.min.js"></script>
 <script src="/assets/js/stomp.min.js"></script>
-<%--<script src="/assets/js/main.js"></script>--%>
+<script src="/assets/js/main.js"></script>
 
 
 
@@ -53,6 +54,10 @@
 
  <%--upload file--%>
 <script src="/assets/js/pages/forms/dropify.js"></script>
+
+
+<!-- SweetAlert Plugin Js -->
+<script src="/assets/js/pages/ui/sweetalert.js"></script>
 
 <script>
     $(document).ready(function() {

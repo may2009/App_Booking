@@ -155,4 +155,13 @@ public @ResponseBody int deleteImage(HttpServletRequest id)
     }
 
 
+    @RequestMapping(value="/getRoomHotel", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Room> getRoomHotel(@RequestParam int id) {
+        List<Room> listroom = roomRepo.getRoomHotel(id);
+
+        return listroom;
+    }
+
+
     }

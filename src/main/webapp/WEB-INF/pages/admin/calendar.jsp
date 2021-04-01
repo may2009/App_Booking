@@ -40,9 +40,12 @@
                         <c:forEach items="${bookings}" var="b">
                             <div class="e_list">
                                 <h5 class="e_name">${b.titre} <span class="badge badge-primary float-right">${b.booking_time}</span></h5>
-                                <address><i class="zmdi zmdi-pin"></i> ${b.hotel.name}</address>
-                                <p class="e_details"><strong style="color: red">Prix : </strong> ${b.prix} </p>
+                                <address><i class="zmdi zmdi-pin"></i> ${b.hotel.name} - ${b.room.name}</address>
+                                <p class="e_details"><strong style="color: red">Client : </strong> ${b.client.name} ${b.client.lastName} </p>
+                                <p class="e_details"><strong style="color: green">Nuits : </strong> ${b.night}</p>
+                                <p class="e_details"><strong style="color: #117a8b">Invité : </strong> ${b.invite}</p>
                             </div>
+
                         </c:forEach>
 
                         </div>

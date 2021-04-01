@@ -132,7 +132,8 @@ $(function() {
 
                        eventy.push({
                            title: item.titre,
-                           start: item.booking_time,
+                           start: item.date_debut,
+                           end: item.date_fin,
                            className:   'bg-info'
                        });
 

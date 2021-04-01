@@ -35,10 +35,13 @@
                             <thead>
                             <tr>
                                 <th>Titre</th>
-                                <th>Booking Time</th>
+                                <th>Booking Début</th>
+                                <th>Booking Fin</th>
                                 <th>Client</th>
                                 <th>hotel</th>
-                                <th>Prix</th>
+                                <th>Chambre</th>
+                                <th>Invité</th>
+                                <th>Nuits</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -46,10 +49,13 @@
                             <c:forEach items="${booking}" var="b">
                                 <tr>
                                     <td>${b.titre}</td>
-                                    <td>${b.booking_time}</td>
+                                    <td>${b.date_debut}</td>
+                                    <td>${b.date_fin}</td>
                                     <td>${b.client.name} ${b.client.lastName}</td>
                                     <td>${b.hotel.name}</td>
-                                    <td>${b.prix} MAD</td>
+                                    <td>${b.room.name}</td>
+                                    <td>${b.invite}</td>
+                                    <td>${b.night}</td>
                                     <td>
                                         <a type="button" class="btn btn-primary" style="color: white"
                                                 href="/admin/editBooking?id=${b.id}">Modifier</a>

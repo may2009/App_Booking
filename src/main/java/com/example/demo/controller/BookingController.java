@@ -1,14 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.*;
-import com.example.demo.models.Booking;
-import com.example.demo.models.Client;
-import com.example.demo.models.Hotel;
-import com.example.demo.models.Permission;
+import com.example.demo.models.*;
 import com.example.demo.services.BookingService;
 import com.example.demo.services.ClientService;
+import com.example.demo.services.UsersService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +34,8 @@ public class BookingController {
     private HotelRepo hotelRepo;
     @Autowired
     private PermissionRepo permissionRepo;
+    @Autowired
+    private UsersService userService;
 
     @RequestMapping("/addBooking")
     public ModelAndView addBooking() {
@@ -49,7 +51,11 @@ public class BookingController {
     @PostMapping(value="/saveBooking")
     public ModelAndView add(@ModelAttribute Hotel hotel, @ModelAttribute Booking booking) throws JsonProcessingException {
 
-        bookingService.saveBooking(booking,hotel);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Users user = userService.findUserByUserName(auth.getName());
+
+
+        bookingService.saveBooking(booking,hotel,user);
 
         return listBooking();
     }
@@ -108,6 +114,22 @@ public class BookingController {
         List<Booking> booking = bookingRepo.findAll();
 
         return booking;
+    }
+
+    @RequestMapping(value="/checkdateDebut", method = RequestMethod.GET)
+    public @ResponseBody int checkdateDebut(@RequestParam String date) throws
+            JsonProcessingException {
+        int countDate = bookingRepo.checkdateDebut(date);
+
+        return countDate;
+    }
+
+    @RequestMapping(value="/gethotelNoReserve", method = RequestMethod.GET)
+    public @ResponseBody List<Hotel> gethotelNoReserve(@RequestParam String date_debut,@RequestParam String date_fin) throws
+            JsonProcessingException {
+        List<Hotel> hotel = hotelRepo.gethotelNoReserve(date_debut,date_fin);
+
+        return hotel;
     }
 
 

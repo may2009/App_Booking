@@ -28,6 +28,24 @@ public class Booking {
     private Hotel hotel;
 
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "room")
+    private Room room;
+
+    @Column(name = "nombre", nullable = true)
+    private int name;
+
+    @Column(name = "night", nullable = true)
+    private int night;
+
+    @Column(name = "date_debut", nullable = true)
+    private String date_debut;
+
+    @Column(name = "date_fin", nullable = true)
+    private String date_fin;
+
+    @Column(name = "invite", nullable = true)
+    private int invite;
 
 
     @Column(name = "booking_time", nullable = true)
@@ -114,7 +132,51 @@ public class Booking {
         this.client = client;
     }
 
+    public int getName() {
+        return name;
+    }
 
+    public void setName(int name) {
+        this.name = name;
+    }
 
+    public int getNight() {
+        return night;
+    }
 
+    public void setNight(int night) {
+        this.night = night;
+    }
+
+    public String getDate_debut() {
+        return date_debut;
+    }
+
+    public void setDate_debut(String date_debut) {
+        this.date_debut = date_debut;
+    }
+
+    public String getDate_fin() {
+        return date_fin;
+    }
+
+    public void setDate_fin(String date_fin) {
+        this.date_fin = date_fin;
+    }
+
+    public int getInvite() {
+        return invite;
+    }
+
+    public void setInvite(int invite) {
+        this.invite = invite;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
 }

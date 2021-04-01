@@ -36,8 +36,12 @@
     <!-- Main Css -->
     <link rel="stylesheet" href="/assets/css/main.css">
 
+    <%--sweetalert--%>
+    <link rel="stylesheet" href="/assets/plugins/sweetalert/sweetalert.css"/>
 
-    <%--upload--%>
+
+
+<%--upload--%>
     <link rel="stylesheet" href="/assets/plugins/dropify/css/dropify.min.css">
 
 <style>
