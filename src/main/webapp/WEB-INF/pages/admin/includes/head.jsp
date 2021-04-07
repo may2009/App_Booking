@@ -62,7 +62,7 @@
     <script src="/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
 </head>
 
-<body class="theme-blush">
+<body class="theme-blush right_icon_toggle">
 
 <!-- Page Loader -->
 <div class="page-loader-wrapper">
@@ -88,15 +88,15 @@
 <div id="topBar" style="padding: 20px;background-color: #383838;">
 
     <a href="/logout" class="mega-menu" style="float: right;margin-top: -10px;color: white;padding-left: 2%;" title="Sign Out"><i class="zmdi zmdi-power"></i></a>
-    <a href="#search" class="main_search" style="float: right;margin-top: -10px;color: white" title="Search..."><i class="zmdi zmdi-search"></i></a>
-
+    <%--<a href="#search" class="main_search" style="float: right;margin-top: -10px;color: white" title="Search..."><i class="zmdi zmdi-search"></i></a>--%>
+    <a href="javascript:void(0);" style="float: right;margin-top: -10px;color: white" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a>
 </div>
 
-<!-- Right Icon menu Sidebar -->
+<%--<!-- Right Icon menu Sidebar -->
 <div class="navbar-right">
     <ul class="navbar-nav">
-        <li><a href="#search" class="main_search" title="Search..."><i class="zmdi zmdi-search"></i></a></li>
-        <li class="dropdown">
+        &lt;%&ndash;<li><a href="#search" class="main_search" title="Search..."><i class="zmdi zmdi-search"></i></a></li>&ndash;%&gt;
+       &lt;%&ndash; <li class="dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle" title="App" data-toggle="dropdown" role="button"><i class="zmdi zmdi-apps"></i></a>
             <ul class="dropdown-menu slideUp2">
                     <li class="header">App Réservation</li>
@@ -162,8 +162,8 @@
                     </ul>
                 </li>
             </ul>
-        </li>
-       <%-- <li class="dropdown">
+        </li>&ndash;%&gt;
+       &lt;%&ndash; <li class="dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle" title="Notifications" data-toggle="dropdown" role="button"><i class="zmdi zmdi-notifications"></i>
                 <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
             </a>
@@ -238,8 +238,8 @@
                 </li>
                 <li class="footer"> <a href="javascript:void(0);">View All Notifications</a> </li>
             </ul>
-        </li>--%>
-        <%--<li class="dropdown">
+        </li>&ndash;%&gt;
+        &lt;%&ndash;<li class="dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="zmdi zmdi-flag"></i>
                 <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
             </a>
@@ -322,14 +322,14 @@
                     </ul>
                 </li>
             </ul>
-        </li>--%>
-   <%--     <li><a href="javascript:void(0);" class="app_calendar" title="Calendar"><i class="zmdi zmdi-calendar"></i></a></li>--%>
-       <%-- <li><a href="javascript:void(0);" class="app_google_drive" title="Google Drive"><i class="zmdi zmdi-google-drive"></i></a></li>--%>
-     <%--   <li><a href="javascript:void(0);" class="app_group_work" title="Group Work"><i class="zmdi zmdi-group-work"></i></a></li>--%>
-        <li><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
+        </li>&ndash;%&gt;
+   &lt;%&ndash;     <li><a href="javascript:void(0);" class="app_calendar" title="Calendar"><i class="zmdi zmdi-calendar"></i></a></li>&ndash;%&gt;
+       &lt;%&ndash; <li><a href="javascript:void(0);" class="app_google_drive" title="Google Drive"><i class="zmdi zmdi-google-drive"></i></a></li>&ndash;%&gt;
+     &lt;%&ndash;   <li><a href="javascript:void(0);" class="app_group_work" title="Group Work"><i class="zmdi zmdi-group-work"></i></a></li>&ndash;%&gt;
+
         <li><a href="/logout" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
     </ul>
-</div>
+</div>--%>
 
 <!-- Left Sidebar -->
 <aside id="leftsidebar" class="sidebar">
@@ -338,31 +338,10 @@
         <a href="/admin/home"><img src="/assets/images/logo.png" width="50" alt="Aero"><span class="m-l-10" style="color: white">App Réservation</span></a>
     </div>
     <div class="menu">
-        <ul class="list">
-            <li>
-                <div class="user-info">
-
-                </div>
-            </li>
-
-            <li ><a href="/admin/home"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
-            <li ><a href="/admin/calendar"><i class="zmdi zmdi-calendar"></i><span>Clendar</span></a></li>
-            <li><a href="/admin/clients"><i class="zmdi zmdi-account"></i><span>Clients</span></a></li>
-            <li><a href="/admin/listBooking"><i class="zmdi zmdi-bookmark"></i><span>Bookings</span></a></li>
-            <li><a href="javascript:void(0);"  class="menu-toggle"><i class="zmdi zmdi-hotel"></i><span>Hotel & Chambres</span></a>
-                <ul class="ml-menu">
-                    <li><a href="/admin/hotel">Hotel</a></li>
-                    <li><a href="/admin/room">Chambres</a></li>
-                </ul>
-            </li>
+        <ul class="list" id="menulist">
 
 
 
-
-            <li><a href="/admin/SendMail"><i class="zmdi zmdi-mail-send"></i><span>Messages</span></a></li>
-            <li><a href="/admin/chat"><i class="zmdi zmdi-tag-more"></i><span>Chat</span></a></li>
-            <li><a href="/admin/client_facture"><i class="zmdi zmdi-format-list-bulleted"></i><span>Facture</span></a></li>
-            <li><a href="/admin/permissions"><i class="zmdi zmdi-settings"></i><span>Settings</span></a></li>
 
 
         </ul>
@@ -375,7 +354,7 @@
 <aside id="rightsidebar" class="right-sidebar">
     <ul class="nav nav-tabs sm">
         <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
-        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat"><i class="zmdi zmdi-comments"></i></a></li>
+        <%--<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat"><i class="zmdi zmdi-comments"></i></a></li>--%>
     </ul>
     <div class="tab-content">
         <div class="tab-pane active" id="setting">

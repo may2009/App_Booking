@@ -1,3 +1,4 @@
+/*
 $(function () {
     $('.js-basic-example').DataTable();
 
@@ -8,4 +9,4 @@ $(function () {
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     });
-});
+});*/
