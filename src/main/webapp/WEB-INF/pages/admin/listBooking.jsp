@@ -57,8 +57,8 @@
                                     <td>${b.invite}</td>
                                     <td>${b.night}</td>
                                     <td>
-                                        <a type="button" class="btn btn-primary" style="color: white"
-                                                href="/admin/editBooking?id=${b.id}">Modifier</a>
+                                        <%--<a type="button" class="btn btn-primary" style="color: white"
+                                                href="/admin/editBooking?id=${b.id}">Modifier</a>--%>
                                         <a href="/admin/deleteBooking?id=${b.id}" style="color: white"
                                            class="btn btn-sm btn-danger" type="button" id="SupBtn" >
                                             Supprimer

@@ -74,7 +74,7 @@ $(function() {
 
     var current = yyyy + '-' + mm + '-';
 
-    var calendar = $('#calendar');
+    var calendar = $('.calendarysn');
 
 
 

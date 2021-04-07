@@ -42,9 +42,10 @@ public class PermissionsController {
     public ModelAndView permissions(){
         ModelAndView modelAndView = new ModelAndView();
         Map<String, Object> model = new HashMap<String, Object>();
-        List<Page> page = pageRepo.findAll();
+
         Pageable pageRequest = PageRequest.of(0,6);
         List<Permission> permission = permissionRepo.findAll(pageRequest).getContent();
+        List<Page> page = pageRepo.findAll(pageRequest).getContent();
 
         int limit = 6;
         int size = pageRepo.findAll().size()/limit;

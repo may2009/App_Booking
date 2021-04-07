@@ -133,8 +133,12 @@ public class FactureController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=customers.pdf");
 
+                try {
+                    sendmail(clientfacture,FILE);
+                }catch (Exception e){
 
-        sendmail(clientfacture,FILE);
+                }
+
 
         return ResponseEntity
                 .ok()

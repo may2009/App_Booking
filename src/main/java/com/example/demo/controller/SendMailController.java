@@ -42,7 +42,12 @@ public class SendMailController {
 
     @RequestMapping(value="/send", method= RequestMethod.POST)
     public ModelAndView sendEmail(@ModelAttribute SendMail sendmail) throws javax.mail.MessagingException, MessagingException, IOException {
+
+     try{
         sendmail(sendmail);
+    }catch (Exception e){
+
+    }
 
         sendMailRepo.save(sendmail);
         return new ModelAndView("/admin/sendmail");

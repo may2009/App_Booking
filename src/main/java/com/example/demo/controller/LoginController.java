@@ -1,5 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.BookingRepo;
+import com.example.demo.dao.ClientRepo;
+import com.example.demo.dao.HotelRepo;
+import com.example.demo.dao.RoomRepo;
 import com.example.demo.models.Users;
 import com.example.demo.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +16,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class LoginController {
 
     @Autowired
     private UsersService userService;
+
+    @Autowired
+    ClientRepo clientRepo;
+    @Autowired
+    HotelRepo hotelRepo;
+    @Autowired
+    RoomRepo roomRepo;
+    @Autowired
+    BookingRepo bookingRepo;
 
     @GetMapping(value={"/", "/login"})
     public ModelAndView login(){
@@ -64,7 +79,15 @@ public class LoginController {
         Users user = userService.findUserByUserName(auth.getName());
         modelAndView.addObject("userName", "Welcome " + user.getUserName() + "/" + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+        //Card
+        modelAndView.addObject("clients",clientRepo.findAll().size());
+        modelAndView.addObject("hotels",hotelRepo.findAll().size());
+        modelAndView.addObject("chambres",roomRepo.findAll().size());
+        modelAndView.addObject("bookings",bookingRepo.findAll().size());
+
         modelAndView.setViewName("admin/home");
+
+
         return modelAndView;
     }
 

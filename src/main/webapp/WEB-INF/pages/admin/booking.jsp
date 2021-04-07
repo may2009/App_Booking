@@ -65,6 +65,7 @@
 
                     <div class="form-group">
                         <label>Hotel :</label>
+
                         <select disabled required onchange="getRoom(this)" class="form-control show-tick ms search-select select2" name="hotel" id="hotel">
 
                         </select>
@@ -78,17 +79,17 @@
                         </select>
                     </div>
 
-                <div class="form-group">
+                <div class="form-group" hidden>
                         <label>Nuits :</label>
-                    <input type="number" required name="night" class="form-control" id="night">
+                    <input type="number" value="${booking.night}"  name="night" class="form-control" id="night">
                 </div>
 
                 <div class="form-group">
-                    <label>Invité :</label>
-                    <input type="number" required name="invite" class="form-control" id="invite">
+                    <label>Nombre du personnel :</label>
+                    <input type="number" min="1" max="5" value="${booking.invite}" required name="invite" class="form-control" id="invite">
                 </div>
 
-                    <button type="submit" class="btn btn-success" id="submit">${submit}</button>
+                    <button type="submit"  class="btn btn-success" id="submit">${submit}</button>
             </form>
 
                        <%-- <button  class="btn btn-raised btn-primary waves-effect" data-type="confirm" id="warning">CLICK ME</button>--%>
@@ -147,6 +148,14 @@
 
             }
         });
+
+            const date1 = new Date(d1);
+            const date2 = new Date(d2);
+            const diffTime = Math.abs(date2 - date1);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            $("#night").val(diffDays);
+
         }else{
             $("#warning").click();
             $("#hotel").prop('disabled', true);
