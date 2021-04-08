@@ -45,7 +45,7 @@ public class UsersController {
     public ModelAndView home() {
         Map<String, Object> model = new HashMap<String, Object>();
 
-            model.put("name_page","about.jsp");
+            model.put("name_page","home.jsp");
            return new ModelAndView("/users/index", model);
 
     }
@@ -54,7 +54,7 @@ public class UsersController {
     public ModelAndView about() {
         Map<String, Object> model = new HashMap<String, Object>();
 
-        model.put("name_page","home.jsp");
+        model.put("name_page","about.jsp");
 
         return new ModelAndView("/users/index", model);
 
